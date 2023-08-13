@@ -1,5 +1,3 @@
-//Problem 5
-
 //This program will efficiently check whether an integer is a prime number or not.
 
 #include <iostream>
