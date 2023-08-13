@@ -1,0 +1,36 @@
+//Asks user for two strings then swaps the two strings
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string str1;
+    int length1;
+    string str2;
+    int length2;
+    //Asks the user to input first string
+    cout << "Please provide the first string to swap" << endl;
+    //str1 stores the first string
+    getline(cin, str1);
+    //length1 stores the length of the first string
+    length1 = str1.length();
+    //Asks user for the second string
+    cout << "Please provide the second string to swap" << endl;
+    //str2 stores the second string
+    getline(cin, str2);
+    //length2 stores the length of the second string
+    length2 = str2.length();
+    //Step 1: str1(x) = str1(x) + str2(y)
+    str1 = str1 + str2;
+    //Step 2: str2(x) = [str1(x) - str2(y)] <-- done by excluding str2 in substring
+    str2 = str1.substr(0, length1);
+    //Step 3: str1(x) = [str1(x) - str(y)] <-- done by excluding str1 in substring
+    str1 = str1.substr(length1, length2);
+    //Outputting both strings in their swapped form
+    cout << "String 1: " << str1 << endl;
+    cout << "String 2: " << str2 << endl;
+
+    return 0;
+}
