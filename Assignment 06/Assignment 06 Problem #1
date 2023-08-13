@@ -1,0 +1,56 @@
+//Creates a 3D matrix of people's name and retrives the name at the index selected by the user
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int NUM_GENDER = 2;
+    int NUM_AGE_GROUP = 3;
+    int NUM_STATES = 4;
+    int index;
+    
+    //Hardcoded 3D array
+    string names[NUM_GENDER][NUM_AGE_GROUP][NUM_STATES] = {
+    {
+    {"Liam", "Noah", "Oliver", "Elijah"},
+    {"William", "James", "Benjamin", "Lucas"},
+    {"Henry", "Alexander", "Mason", "Ethan"}
+    },
+    {
+    {"Ava", "Sophia", "Isabella", "Evelyn"},
+    {"Olivia", "Emma", "Charlotte", "Amelia"},
+    {"Luna", "Camila", "Gianna", "Elizabeth"}
+    }
+    };
+    
+    //Asks for a user input for the index
+    cout << "Please enter an composite number between 0 and 23" << endl;
+    //Stores the user inputted index in the varibale index
+    cin >> index;
+    
+    //Prints out error if the index is out of the 3D array bounds
+    if((index < 0) || (index > 23))
+    {
+        cout << "Error: This value is outside the specified range. Please run the program again with a valid index" << endl;
+    }
+    //If the index is in bounds
+    else
+    {
+        //Calculates the first bracket index by dividing the index by the number of elements in each 2D matrix
+        int x = index / (NUM_STATES * NUM_AGE_GROUP);
+        //If the bracket is in the second 2D matrix, this will decrease index to make the next calculation stay in bounds
+        index -= (x * (NUM_STATES * NUM_AGE_GROUP));
+        //Calculates the second bracket index by dividing the index by the number of columns in each 2D matrix
+        int y = index / NUM_STATES;
+        //Decreases the index until only index % NUM_STATES remains, which is the third bracket index
+        index -= (NUM_STATES * y);
+        //Assigns the remainder of index % NUM_STATES to z
+        int z = index;
+        //Prints out the corrects element for the user-inputted index
+        cout << "The name at this index is: " << names[x][y][z] << endl;
+    }
+
+    return 0;
+}
