@@ -1,0 +1,71 @@
+//Asks the user for a series of nibbles in hex and coverts the series back into a string
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string hex;
+    int temp = 0;
+    //Asks for a user inputted hex sequence
+    cout << "Please enter an even numbered sequence of hexadecimal characters" << endl;
+    //string hex stores the user inputted sequence
+    cin >> hex;
+    char nibbles[hex.length()];
+    int ASCII[(hex.length() / 2)];
+    //If the sequence has an odd number of characters, it stops the program and produces an meassage saying invalid input
+    if(hex.length() % 2 == 1)
+    {
+        cout << "This sequence is not valid" << endl;
+    }
+    //valid input sequence
+    else
+    {
+        for(int x = 0; x < hex.length(); x++)
+        {
+            //Each element of the sequence is stored as a character is array nibbles
+            nibbles[x] = hex.at(x);
+            //For even numbered itereations, which are the first nibble of each output character
+            if(x % 2 == 0)
+            {
+                //converts the first nibble into its binary counterpart by converting it into its integer equaivalent then multiplying it by 16
+                //For hex values 0-9
+                if((int)(nibbles[x]) > 57)
+                {
+                    temp = ((int)(nibbles[x]) - 55) * 16;
+                }
+                //For hex values A-F
+                else
+                {
+                    temp = ((int)(nibbles[x]) - 48) * 16;
+                }
+            }
+            //For odd numbered itereations, which are the second nibble of each output character
+            else
+            {
+                //converts the second nibble into its binary counterpart by converting it into its integer equaivalent and adding to temp, which already has the first nibble's binary counterpart
+                //For hex values 0-9
+                if((int)(nibbles[x]) > 57)
+                {
+                    temp += ((int)(nibbles[x]) - 55);
+                    ASCII[(x / 2)] = temp;
+                    temp = 0;
+                }
+                //For hex values A-F
+                else
+                {
+                    temp += ((int)(nibbles[x]) - 48);
+                    ASCII[(x / 2)] = temp;
+                    temp = 0;
+                }
+            }
+        }
+        //Outputs the array ASCII, coverting them to char values at run time
+        for(int x = 0; x < (hex.length() / 2); x++)
+        {
+            cout << (char)(ASCII[x]);
+        }
+    }
+
+    return 0;
