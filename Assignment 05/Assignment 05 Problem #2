@@ -1,0 +1,45 @@
+//Asks the user to input a matrix size and creates a maxtrix od asterisks of that size
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int size;
+    //Asks for a user inputed size for the asterisk ramp
+    cout << "Please enter a size for your asterisk ramp" << endl;
+    //size stores the user inputted size
+    cin >> size;
+    char ramp[size][size];
+    int temp;
+    //Fills up the matrix from the bottom rows up so fill a full row and decrease the amount of asterisks as it goes up
+    for(int x = (size - 1); x >= 0; x--)
+    {
+        for(int y = 0; y < size; y++)
+        {
+            //Will be a marker that increases as the rows go up (making more spaces)
+            temp = (size - 2) - x;
+            //If the character should be an asterisk, then its column position should be greater than temp
+            if(y > temp)
+            {
+                ramp[x][y] = '*';
+            }
+            //If the character should be a space, then its column position should be less than temp
+            else
+            {
+                ramp[x][y] = ' ';
+            }
+        }
+    }
+    //Outputs the matrix
+    for(int x = 0; x < size; x++)
+    {
+        for(int y = 0; y < size; y++)
+        {
+            cout << ramp[x][y];
+        }
+        cout << endl;
+    }
+
+    return 0;
