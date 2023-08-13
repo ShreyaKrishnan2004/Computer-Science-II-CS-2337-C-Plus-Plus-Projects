@@ -1,0 +1,39 @@
+/*Asks the user for a number, a number of words, and a character and outputs a comma separated
+list of each word that contains the character*/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    char character;
+    //Asks the user for a number, words, and a character
+    cout << "Please enter a number, a number of words, and a character" << endl;
+    //Stores the first number in num
+    cin >> num;
+    
+    /*Creates an array with the size being the user-inputted number
+    (to ensure the next for loop will take the correct number of words)*/
+    string words[num];
+    //Takes the next num number of words and stores each of them in array words
+    for(int x = 0; x < num; x++)
+    {
+        cin >> words[x];
+    }
+    //The last character is stored in variable character
+    cin >> character;
+    /*For each word in array words, if the word contains the char character,
+    then it will be outputted followed by a comma*/
+    for(int x = 0; x < num; x++)
+    {
+        if(words[x].find(character) != string::npos)
+        {
+            cout << words[x] << ", ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
