@@ -1,0 +1,71 @@
+/*For a password to adhere to a certain comapny's policies, it must be at least 8
+characters long and include at least one upper case letter, number, and punctuation
+mark. This code asks the user for a password and checks whether it adheres to the
+company's policies and states what should be changed or added if the password does
+not adhere to the company's policies*/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  string password;
+  bool upperCaseLetter = false;
+  bool number = false;
+  bool punctuation = false;
+  //Asking the user for their password
+  cout << "Please enter your password" << endl;
+  //password stores the user's password
+  cin >> password;
+  //Checks each character of the password looking for an uppercase letter, number, and punctuation
+  for(int x = 0; x < password.length(); x++)
+  {
+      //bool punctuation becomes true if the charcter is punctuation
+      if(((int)(password.at(x)) > 32 && (int)(password.at(x)) < 48) || ((int)(password.at(x)) > 57 && (int)(password.at(x)) < 65) || ((int)(password.at(x)) > 90 && (int)(password.at(x)) < 97) || (int)(password.at(x)) == 126)
+      {
+          punctuation = true;
+      }
+      //bool number becomes true if the charcter is a number
+      else if((int)(password.at(x)) > 47 && (int)(password.at(x)) < 58)
+      {
+          number = true;
+      }
+      //bool upperCaseLetter becomes true if the charcter is an uppercase letter
+      else if((int)(password.at(x)) > 64 && (int)(password.at(x)) < 91)
+      {
+          upperCaseLetter = true;
+      }
+  }
+  //If the password is less than 8 characters, it will print this out without even showing the user whether they are missing certain characters
+  if(password.length() < 8)
+  {
+      cout << "Your password does not adhere to the company's password policy \nPlease make your password at least 8 characters long" << endl;
+  }
+  //THe password meets all of the conditions
+  else if(upperCaseLetter && number && punctuation)
+  {
+      cout << "Your password adheres to the company's password policy" << endl;
+  }
+  //Will print out what the user needs to modify to satisfy the company's password policy
+  else
+  {
+      cout << "Your password does not adhere to the company's password policy \nYour password is missing: ";
+      if(!(upperCaseLetter))
+      {
+          cout << "an uppercase letter, ";
+      }
+      if (!(number))
+      {
+          cout << "a number, ";
+      }
+      if(!(punctuation))
+      {
+          cout << "punctuation";
+      }
+      cout << endl;
+      cout << "Please include the above in your password for it to adhere to the company's password policy" << endl;
+  }
+
+  return 0;
+}
