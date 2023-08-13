@@ -1,0 +1,102 @@
+/*Creates a vector of 10 random integers and asks the user to select one of three
+functions: offsetting each value in the vector, displaying a certain value of the
+vector, or outputting the max value times a multiplication factor*/
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+void printOffsetValues(int offset, vector <int> collection)
+{
+    //Prints the function called
+    cout << "You have called the printOffsetValues function.\n";
+    cout << "Elements of the Vector With Offset: ";
+    //Prints each element of the vector with the offset
+    for(int x = 0; x < collection.size(); x++)
+    {
+        cout << (collection.at(x) + offset) << ", ";
+    }
+    cout << endl;
+}
+void displayNthElement(int location, vector <int> collection)
+{
+    //Prints the function called
+    cout << "You have called the displayNthElement function.\n";
+    //Prevents an out of bounds error
+    if(location > 9)
+    {
+        cout << "This value is not valid. Please try again with a valid index" << endl;
+    }
+    //Prints the element at the desired index
+    else
+    {
+        cout << "The element at index " << location << " is " << collection.at(location);
+    }
+}
+void printNTimesMax(int multFactor, vector <int> collection)
+{
+    //Prints the function called
+    cout << "You have called the printNTimesMax function.\n";
+    //max will store the maximum value
+    long long max = collection.at(0);
+    //Iterates through the vector to find the max value
+    for(int x = 0; x< collection.size(); x++)
+    {
+        if(collection.at(x) > max)
+        {
+            max = collection.at(x);
+        }
+    }
+    //Prints out the max times the factor of multiplication
+    cout << (max * multFactor) << endl;
+}
+int main()
+{
+    int function;
+    int parameter;
+    vector <int> collection;
+    //Initializes the vector
+    for(int x = 0; x < 10; x++)
+    {
+        collection.push_back(rand());
+    }
+    //Prompts the user to indicate which function they would like to run
+    cout << "Please enter a integer between 0 and 2 to indiciate which function you would like to run: ";
+    cout << "\n0 - printOffsetValues\n1 - displayNthElement\n2 - printNTimesMax" << endl;
+    //Stores the user-inputted number in function
+    cin >> function;
+    //Prompts the user to enter a parameter
+    cout << "Please enter the first parameter: " << endl;
+    //Stores the user-inputted number in parameter
+    cin >> parameter;
+    //Declares the function pointer operation
+    void (*operation)(const int, const vector<int>);
+    //Sets operation to the function that the user indicates based on their input
+    switch(function)
+    {
+        case 0:
+        {
+            operation = printOffsetValues;
+            break;
+        }
+        case 1:
+        {
+            operation = displayNthElement;
+            break;
+        }
+        case 2:
+        {
+            operation = printNTimesMax;
+            break;
+        }
+        //Will execute if the user inputs a function value greater than 2
+        default:
+        {
+            cout << "The value you entered is not valid. Please try again with a valid number" << endl;
+        }
+    }
+    //Calls the desired function
+    (*operation)(parameter, collection);
+}
