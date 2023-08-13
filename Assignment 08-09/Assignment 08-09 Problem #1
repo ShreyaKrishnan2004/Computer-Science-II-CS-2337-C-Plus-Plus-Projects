@@ -1,0 +1,44 @@
+/*Creates a dynamically allocated array of random integers of a user-inputted size, outputs
+the average and sum of the numbers in the array, then deletes the array*/
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    int size;
+    long long total = 0;
+    double average = 0.0;
+    
+    //Prompting the user to enter a size for the array
+    cout << "Please enter a size (postitive integer) for the array: " << endl;
+    //Storing the user-inputted integer in size
+    cin >> size;
+    
+    //Program terminates with an error message if size is negative
+    if(size < 0)
+    {
+        cout << "Size invalid. Please try again with a valid size." << endl;
+    }
+    //Program continues if size is positive
+    else
+    {
+        //Creating the dynamically allocated array with the user inputted size
+        int *arr = new int(size);
+        for(int x = 0; x < size; x++)
+        {
+            //Initializing the array values using rand()
+            arr[size] = rand();
+            //Adding each value to total, which stores the sum of all of the values
+            total += arr[size];
+        }
+        //Computes the average of the values
+        average = (total / ((double)(size)));
+        //Displays both the sum and the average
+        cout << "Sum: " << total << "\nAverage: " << average << endl;
+        //Deletes the array
+        delete [] arr;
+    }
+}
