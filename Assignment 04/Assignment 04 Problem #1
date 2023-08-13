@@ -1,0 +1,40 @@
+//Outputs each nibble of a user-inputted string in hex
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    string word;
+    //Asks for a word from the user and stores in string word
+    cout << "Please enter a word" << endl;
+    cin >> word;
+    //nibble1 stores the first nibble of every character
+    char nibble1[word.length()];
+    //nibble2 stores the second nibble of every character
+    char nibble2[word.length()];
+    int character;
+    for(int x = 0; x < word.length(); x++)
+    {
+        //character stores the ASCII value of each character
+        character = (int)(word.at(x));
+        //Uses integer division to determine first nibble of character and stores in its respective index in nibble1
+        nibble1[x] = (char)((character / 16) + 48);
+        //Adjusts the ASCII ofset for values above 9 to make them hex letters
+        if((character / 16) > 9)
+        {
+            nibble1[x] = (char)((character / 16) + 55);
+        }
+        //Uses modular division to determine second nibble of character and stores in its respective index in nibble2
+        nibble2[x] = (char)((character % 16) + 48);
+        //Adjusts the ASCII ofset for values above 9 to make them hex letters
+        if((character % 16) > 9)
+        {
+            nibble2[x] = (char)((character % 16) + 55);
+        }
+        //outputs each nibble
+        cout << nibble1[x] << nibble2[x];
+    }
+    return 0;
+}
